@@ -21,6 +21,7 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'role',
     ];
 
     /**
@@ -41,4 +42,29 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+    
+    public function isSuperEmployer()
+    {
+        return $this->role === 'super_employer';
+    }
+
+    public function isMediumEmployer()
+    {
+        return $this->role === 'medium_employer';
+    }
+
+    public function isStudent()
+    {
+        return $this->role === 'student';
+    }
+
+    public function etudiant()
+    {
+        return $this->hasOne(Etudiant::class);
+    }
+
+    public function employer()
+    {
+        return $this->hasOne(Employer::class);
+    }
 }
