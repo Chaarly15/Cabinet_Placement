@@ -4,11 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use App\Models\Stage;
-use App\Models\User;
-use App\Models\Candidature;
 
-namespace App\Models;
 
 class Etudiant extends Model
 {
@@ -18,6 +14,7 @@ class Etudiant extends Model
         'user_id',
         'nom',
         'prenom',
+        'nom_etude',
         'prenom_etud',
         'tel_etud',
         'adress_etud',

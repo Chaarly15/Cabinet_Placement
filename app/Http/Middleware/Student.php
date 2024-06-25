@@ -19,6 +19,7 @@ class Student
             return $next($request);
         }
 
-        return redirect('/home')->with('error', "Vous n'avez pas accès à cette page.");
+        return redirect('etudiants.create')->with('error', "Vous n'avez pas accès à cette page.");
+        
     }
 }
