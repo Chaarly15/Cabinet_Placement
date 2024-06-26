@@ -11,7 +11,7 @@ class Employer extends Model
     use HasFactory;
 
     protected $fillable = [
-        'user_id', 'nom', 'prenom', 'role',
+        'user_id', 'nom', 'prenom', 'tel_empl', 'adress_empl', 'role',
     ];
 
     public function user()
@@ -22,5 +22,15 @@ class Employer extends Model
     public function candidatures()
     {
         return $this->hasMany(Candidature::class, 'employer_id');
+    }
+
+    /**
+     * Get all of the validMails for the Employer
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function validMails(): HasMany
+    {
+        return $this->hasMany(ValidMails::class);
     }
 }

@@ -59,7 +59,7 @@ class RegisterController extends Controller
         $this->validator($request->all())->validate();
 
         $user = User::create([
-            'name' => $request->name,
+            //'name' => $request->name,
             'email' => $request->email,
             'password' => Hash::make($request->password),
             'role' => 'super_employer',
@@ -67,14 +67,14 @@ class RegisterController extends Controller
 
         Employer::create([
             'user_id' => $user->id,
-            'nom' => $request->nom,
+            'nom' => $request->name,
             'prenom' => $request->prenom,
-            'tel' => $request->tel,
-            'adresse' => $request->adresse,
-            'ville' => $request->ville,
-            'commune' => $request->commune,
-            'poste' => $request->poste,
-            'entreprise' => $request->entreprise,
+            'tel_empl' => $request->tel_empl,
+            'adress_empl' => $request->adress_empl,
+            //'ville' => $request->ville,
+            //'commune' => $request->commune,
+            //'poste' => $request->poste,
+            //'entreprise' => $request->entreprise,
             'role' => 'super_employer',
         ]);
 

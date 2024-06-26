@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('base')
 
 @section('content')
 <div class="container">
@@ -17,6 +17,19 @@
                             <div class="col-md-6">
                                 <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" required autocomplete="name" autofocus>
                                 @error('name')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                        </div>
+
+                        <!-- Champ Prenom -->
+                        <div class="form-group row">
+                            <label for="prenom" class="col-md-4 col-form-label text-md-right">{{ __('Prenom') }}</label>
+                            <div class="col-md-6">
+                                <input id="prenom" type="text" class="form-control @error('prenom') is-invalid @enderror" name="prenom" value="{{ old('prenom') }}" required autocomplete="prenom" autofocus>
+                                @error('prenom')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
@@ -58,8 +71,31 @@
                             </div>
                         </div>
 
-                        <!-- Champs supplémentaires pour les employeurs -->
-                        <!-- Ajoutez ici les autres champs nécessaires comme nom, prénom, téléphone, etc. -->
+                        <!-- Champ adresse -->
+                        <div class="form-group row">
+                            <label for="adress_empl" class="col-md-4 col-form-label text-md-right">{{ __('Address') }}</label>
+                            <div class="col-md-6">
+                                <input id="adress_empl" type="text" class="form-control @error('adress_empl') is-invalid @enderror" name="adress_empl" value="{{ old('adress_empl') }}" required autocomplete="adress_empl">
+                                @error('adress_empl')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                        </div>
+
+                        <!-- Champ telephone -->
+                        <div class="form-group row">
+                            <label for="tel_empl" class="col-md-4 col-form-label text-md-right">{{ __('Telephone') }}</label>
+                            <div class="col-md-6">
+                                <input id="tel_empl" type="text" class="form-control @error('tel_empl') is-invalid @enderror" name="tel_empl" value="{{ old('tel_empl') }}" required autocomplete="tel_empl">
+                                @error('tel_empl')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                        </div>
 
                         <div class="form-group row mb-0">
                             <div class="col-md-6 offset-md-4">
