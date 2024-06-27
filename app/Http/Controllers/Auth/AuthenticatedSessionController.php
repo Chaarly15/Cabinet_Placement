@@ -29,6 +29,14 @@ class AuthenticatedSessionController extends Controller
 
         $request->session()->regenerate();
 
+        $user = Auth::user();
+        if ($user->role === 'student') {
+            return redirect()->intended(route('cabinet-de-placement.index'))->with('success', 'Connexion réussie.');
+        } elseif ($user->role === 'medium_employer' || $user->role === 'super_employer') {
+            return redirect()->intended(route('dashboard'))->with('success', 'Connexion réussie.');
+        }
+
+        // Si aucun rôle ne correspond, rediriger par défaut
         return redirect()->intended(RouteServiceProvider::HOME);
     }
 

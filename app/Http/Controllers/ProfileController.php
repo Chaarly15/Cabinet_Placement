@@ -32,6 +32,17 @@ class ProfileController extends Controller
             $request->user()->email_verified_at = null;
         }
 
+        //$employer = $user->employer;
+
+        // Update employer-specific fields
+        $employer = $request->user()->employer;
+        $employer->update([
+            'nom' => $request->input('nom'),
+            'prenom' => $request->input('prenom'),
+            'tel_empl' => $request->input('tel_empl'),
+            'adress_empl' => $request->input('adress_empl'),
+        ]);
+
         $request->user()->save();
 
         return Redirect::route('profile.edit')->with('status', 'profile-updated');
@@ -55,6 +66,6 @@ class ProfileController extends Controller
         $request->session()->invalidate();
         $request->session()->regenerateToken();
 
-        return Redirect::to('/');
+        return Redirect::to('/cabinet-de-placement');
     }
 }

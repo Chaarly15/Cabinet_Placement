@@ -23,7 +23,7 @@ class ValidMailController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'email' => 'required|email|unique:valid_mail,email',
+            'email' => 'required|email|unique:valid_mails,email',
             'role' => 'required|in:medium_employer,super_employer',
         ]);
 

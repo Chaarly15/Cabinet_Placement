@@ -18,7 +18,13 @@
                 <p>{{ Auth::user()->role }}</p>
             @endif
             <div name="name">
-                Bienvenue, {{ Auth::user()->etudiant->nom_etude }}
+                @if (Auth::user()->role === 'student')
+                    <p>Bienvenue, {{ Auth::user()->etudiant->nom_etude }}</p>
+                @elseif (Auth::user()->role === 'super_employer')
+                    <p>Bienvenue, {{ Auth::user()->employer->nom }}</p>
+                @elseif (Auth::user()->role === 'medium_employer')
+                    <p>Bienvenue, {{ Auth::user()->employer->nom }}</p>
+                @endif
             </div>
             <div class="update">
                 <a href="{{route('etudiants.edit')}}">Modifier Profile</a>

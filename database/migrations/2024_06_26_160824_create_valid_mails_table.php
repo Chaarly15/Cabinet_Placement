@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('valid_mail', function (Blueprint $table) {
+        Schema::create('valid_mails', function (Blueprint $table) {
             $table->id();
             $table->foreignId('employer_id')->constrained()->onDelete('cascade');
             $table->string('email')->unique();

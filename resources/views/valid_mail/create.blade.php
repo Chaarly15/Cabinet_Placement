@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('base')
 
 @section('content')
 <div class="container">
@@ -14,8 +14,8 @@
         <div class="form-group">
             <label for="role">Rôle</label>
             <select name="role" id="role" class="form-control" required>
-                <option value="medium_employer">Medium Employer</option>
-                <option value="super_employer">Super Employer</option>
+                <option value="medium_employer">Medium Employé</option>
+                <option value="super_employer">Super Employé</option>
             </select>
         </div>
 

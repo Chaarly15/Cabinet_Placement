@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\User;
 use App\Models\Employer;
+use App\Models\ValidMail;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 
@@ -25,7 +26,7 @@ class RegisterController extends Controller
     protected function create(array $data)
     {
         $user = User::create([
-            'name' => $data['name'],
+            //'name' => $data['name'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
             'role' => $data['role'] ?? 'medium_employer', // Rôle par défaut
@@ -58,11 +59,24 @@ class RegisterController extends Controller
     {
         $this->validator($request->all())->validate();
 
+        //$validMail = ValidMail::where('email', $request->email)->where('role', 'super_employer')->first();
+
+        $validMailSuperemployer = ValidMail::where('email', $request->email)->where('role', 'super_employer')->first();
+        $validMailMediumemployer = ValidMail::where('email', $request->email)->where('role', 'medium_employer')->first();
+
+        if ($validMailSuperemployer) {
+            $role = 'super_employer';
+        } elseif ($validMailMediumemployer) {
+            $role = 'medium_employer';
+        } else {
+            return redirect()->back()->withErrors(['email' => 'Cet email n\'est pas autorisé à créer un compte employeur.']);
+        }
+
         $user = User::create([
             //'name' => $request->name,
             'email' => $request->email,
             'password' => Hash::make($request->password),
-            'role' => 'super_employer',
+            'role' => $role,
         ]);
 
         Employer::create([
@@ -75,7 +89,7 @@ class RegisterController extends Controller
             //'commune' => $request->commune,
             //'poste' => $request->poste,
             //'entreprise' => $request->entreprise,
-            'role' => 'super_employer',
+            'role' => $role,
         ]);
 
         return redirect()->route('dashboard')->with('success', 'Compte super_employer créé avec succès.');

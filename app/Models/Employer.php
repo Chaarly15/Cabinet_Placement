@@ -31,6 +31,6 @@ class Employer extends Model
      */
     public function validMails(): HasMany
     {
-        return $this->hasMany(ValidMails::class);
+        return $this->hasMany(ValidMail::class);
     }
 }

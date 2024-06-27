@@ -6,6 +6,9 @@ use App\Http\Controllers\IndexController;
 use App\Http\Controllers\EtudiantController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\ValidMailController;
+use App\Http\Controllers\LanguageController;
+use App\Http\Controllers\AppelOffreController;
+use App\Http\Controllers\CandidatureController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -36,8 +39,9 @@ Route::post('logout', [LoginController::class, 'logout'])->name('logout');
 //});
 
 Route::middleware(['auth', 'super_employer'])->group(function () {
-    /*Route::get('/register-super-employer', [RegisterController::class, 'showSuperEmployerRegisterForm'])->name('register.super_employer');
-    Route::post('/register-super-employer', [RegisterController::class, 'createSuperEmployer']);*/
+    Route::get('/appel-offre', [AppelOffreController::class, 'index'])->name('appel-offre.index');
+    Route::get('/candidature', [CandidatureController::class, 'index'])->name('candidature.index');
+
 
     Route::get('/valid_mail/index', [ValidMailController:: class,'index'])->name('valid_mail.index');
     Route::get('/valid_mail/create', [ValidMailController:: class,'create'])->name('valid_mail.create');
@@ -53,5 +57,9 @@ Route::middleware(['auth', 'student'])->group(function () {
     Route::get('/etudiants/edit', [EtudiantController::class, 'edit'])->middleware('student')->name('etudiants.edit');
     Route::post('/etudiants', [EtudiantController::class, 'update'])->middleware('student')->name('etudiants.update');
 });
+
+//modification de la langue
+Route::get('lang/{locale}', [LanguageController::class, 'changeLanguage'])->name('lang.change');
+
 
 require __DIR__.'/auth.php';
