@@ -12,5 +12,15 @@ class Stage extends Model
     protected $fillable = [
         'date_debut',
         'date_fin',
+        'type_obtention_stage_id',
+        'etudiant_id',
+        'appel_offre_id',
+        'professeur_encadreur_id',
+        'selection_id',
     ];
+
+    public function selection()
+    {
+        return $this->belongsTo(Selection::class);
+    }
 }

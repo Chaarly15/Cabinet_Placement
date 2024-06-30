@@ -7,6 +7,8 @@ export default defineConfig({
             input: [
                 'resources/css/app.css',
                 'resources/js/app.js',
+                'resources/css/index-appel-offre.css',
+                'resources/css/index-candidature.css',
             ],
             refresh: true,
         }),

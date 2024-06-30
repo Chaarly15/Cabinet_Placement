@@ -18,13 +18,6 @@ class Entreprises extends Model
         'tel_etp',
         'tel_etp2',
         'email_etp',
-        'site_web_etp',
-        'natu_acti_etp',
-        'eff_etp',
-        'nom_cont_sa_etp',
-        'fonction_cont_sa_etp',
-        'tel_cont_sa_etp',
-        'email_cont_sa_etp',
     ];
 
     public function appelsOffres()

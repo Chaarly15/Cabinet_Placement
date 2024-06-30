@@ -42,6 +42,16 @@ class EtudiantController extends Controller
             'password' => 'nullable|string|min:8|confirmed',
         ]);
 
+        if ($request->filiere_etud === 'communication et ressources humaines' || $request->filiere_etud === 'assistanat de direction' || $request->filiere_etud === 'gestion des entreprises' || $request->filiere_etud === 'gestion des ressources humaines' || $request->filiere_etud === 'administration des entreprises') {
+            $categorie_filiaire_id = 1;
+        } elseif ($request->filiere_etud === 'marketing') {
+            $categorie_filiaire_id = 2;
+        } elseif ($request->filiere_etud === 'comptabilité' || $request->filiere_etud === 'gestion commerciale' || $request->filiere_etud === 'audit et contrôle de gestion' || $request->filiere_etud === 'finance comptabilité' || $request->filiere_etud === 'fiscalité et droit des affaires') {
+            $categorie_filiaire_id = 3;
+        } elseif ($request->filiere_etud === 'réseau génie logiciel' || $request->filiere_etud === 'informatique développeur d\'application') {
+            $categorie_filiaire_id = 4;
+        }
+
         $etudiant->update([
             'nom_etude' => $request->nom_etude,
             'prenom_etud' => $request->prenom_etud,
@@ -52,6 +62,7 @@ class EtudiantController extends Controller
             'date_naiss_etud'=> $request->date_naiss_etud,
             'niveau_formation_etud'=> $request->niveau_formation_etud,
             'filiere_etud'=> $request->filiere_etud,
+
         ]);
 
         if ($request->filled('password')) {
@@ -97,6 +108,16 @@ class EtudiantController extends Controller
 
         $cvPath = $request->file('cv_path')->store('cvs', 'public');
 
+        if ($request->filiere_etud === 'communication et ressources humaines' || $request->filiere_etud === 'assistanat de direction' || $request->filiere_etud === 'gestion des entreprises' || $request->filiere_etud === 'gestion des ressources humaines' || $request->filiere_etud === 'administration des entreprises') {
+            $categorie_filiaire_id = 1;
+        } elseif ($request->filiere_etud === 'marketing') {
+            $categorie_filiaire_id = 2;
+        } elseif ($request->filiere_etud === 'comptabilité' || $request->filiere_etud === 'gestion commerciale' || $request->filiere_etud === 'audit et contrôle de gestion' || $request->filiere_etud === 'finance comptabilité' || $request->filiere_etud === 'fiscalité et droit des affaires') {
+            $categorie_filiaire_id = 3;
+        } elseif ($request->filiere_etud === 'réseau génie logiciel' || $request->filiere_etud === 'informatique développeur d\'application') {
+            $categorie_filiaire_id = 4;
+        }
+
         Etudiant::create([
             'user_id' => $user->id,
             'nom_etude' => $request->nom_etude,
@@ -107,6 +128,7 @@ class EtudiantController extends Controller
             'commune_etud' => $request->commune_etud,
             'date_naiss_etud' => $request->date_naiss_etud,
             'filiere_etud' => $request->filiere_etud,
+            'categorie_filiaire_id'=> $categorie_filiaire_id,
             'niveau_formation_etud' => $request->niveau_formation_etud,
             'cv_path' => $cvPath,
         ]);
@@ -123,8 +145,6 @@ class EtudiantController extends Controller
 
             return redirect()->intended(route('cabinet-de-placement.index'));
         }
-
-        return redirect()->route('cabinet-de-placement.index');
 
         return redirect()->route('cabinet-de-placement.index')->with('success', 'Étudiant créé avec succès.');
     }

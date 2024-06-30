@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class AppelsOffre extends Model
+class AppelOffre extends Model
 {
     use HasFactory;
 
@@ -32,10 +32,22 @@ class AppelsOffre extends Model
         'renumeration',
         'nbr_poste_dispo',
         'lieu_poste',
+        'date_limite_candidature',
+        'etat_appel_offre',
     ];
 
     public function stages()
     {
         return $this->hasMany(Stage::class);
+    }
+
+    public function entreprise()
+    {
+        return $this->belongsTo(Entreprises::class);
+    }
+
+    public function selections()
+    {
+        return $this->hasMany(Selection::class);
     }
 }

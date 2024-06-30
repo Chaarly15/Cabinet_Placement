@@ -5,18 +5,16 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Candidatures extends Model
+class CategorieFiliaire extends Model
 {
     use HasFactory;
 
     protected $fillable = [
-        'etudiant_id',
-        'employer_id',
-        'status',
+        'categorie_filiaires_id', 'nom_categori_fil',
     ];
 
-    public function selections()
+    public function etudiant()
     {
-        return $this->hasMany(Selection::class);
+        return $this->hasMany(Etudiant::class, 'categorie_filiaires_id');
     }
 }

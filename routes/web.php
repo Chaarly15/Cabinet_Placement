@@ -9,6 +9,7 @@ use App\Http\Controllers\ValidMailController;
 use App\Http\Controllers\LanguageController;
 use App\Http\Controllers\AppelOffreController;
 use App\Http\Controllers\CandidatureController;
+use App\Http\Controllers\SelectionController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -40,15 +41,36 @@ Route::post('logout', [LoginController::class, 'logout'])->name('logout');
 
 Route::middleware(['auth', 'super_employer'])->group(function () {
     Route::get('/appel-offre', [AppelOffreController::class, 'index'])->name('appel-offre.index');
+    Route::get('/appel-offre/create', [AppelOffreController::class, 'create'])->name('appel-offre.create');
+    Route::post('/appel-offre/store', [AppelOffreController::class, 'store'])->name('appel-offre.store');
+
     Route::get('/candidature', [CandidatureController::class, 'index'])->name('candidature.index');
 
 
-    Route::get('/valid_mail/index', [ValidMailController:: class,'index'])->name('valid_mail.index');
-    Route::get('/valid_mail/create', [ValidMailController:: class,'create'])->name('valid_mail.create');
-    Route::post('/valid_mail/store', [ValidMailController:: class,'store'])->name('valid_mail.store');
+    Route::get('/valid_mail/index', [ValidMailController::class,'index'])->name('valid_mail.index');
+    Route::get('/valid_mail/create', [ValidMailController::class,'create'])->name('valid_mail.create');
+    Route::post('/valid_mail/store', [ValidMailController::class,'store'])->name('valid_mail.store');
 
     Route::resource('valid_mail', ValidMailController::class)->except(['show', 'edit', 'update']);
+
+    Route::get('/selection/create/{id}', [SelectionController::class, 'create'])->name('selection.create');
+    Route::post('/selection/store', [SelectionController::class, 'store'])->name('selection.store');
+
+    Route::get('/selection/filter', [SelectionController::class, 'filter'])->name('selection.filter');
+    Route::get('/selection/best_match/{appelOffreId}', [SelectionController::class, 'bestMatch'])->name('selection.best_match');
+
+    Route::get('/stage/create/appelOffre={id}', 'UserController@index')->name('user');
 });
+
+/*Route::middleware(['auth', 'medium_employer'])->group(function () {
+    Route::get('/candidature', [CandidatureController::class, 'index'])->name('candidature.index');
+
+    Route::get('/selection/create/{id}', [SelectionController::class, 'create'])->name('selection.create');
+    Route::post('/selection/store', [SelectionController::class, 'store'])->name('selection.store');
+
+    Route::get('/selection/filter', [SelectionController::class, 'filter'])->name('selection.filter');
+    Route::get('/selection/best_match/{appelOffreId}', [SelectionController::class, 'bestMatch'])->name('selection.best_match');
+});*/
 
 Route::get('/etudiants/create', [EtudiantController::class, 'create'])->name('etudiants.create');
 Route::post('/etudiants/store', [EtudiantController::class, 'store'])->name('etudiants.store');

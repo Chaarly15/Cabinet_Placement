@@ -35,6 +35,7 @@ return new class extends Migration
             $table->unsignedInteger('renumeration');
             $table->unsignedInteger('nbr_poste_dispo');
             $table->string('lieu_poste');
+            //$table->date('date_limite_candidature');
             $table->timestamps();
         });
     }

@@ -33,4 +33,9 @@ class Employer extends Model
     {
         return $this->hasMany(ValidMail::class);
     }
+
+    public function selections()
+    {
+        return $this->hasMany(Selection::class);
+    }
 }
