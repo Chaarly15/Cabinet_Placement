@@ -75,6 +75,8 @@ Route::middleware(['auth', 'super_employer'])->group(function () {
     Route::post('/professeurs', [ProfesseurEncadreurController::class, 'store'])->name('professeurs.store');
 
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+    Route::post('/dashboard/update-chart', [DashboardController::class, 'updateChart'])->name('dashboard.updateChart');
+
 });
 
 /*Route::middleware(['auth', 'medium_employer'])->group(function () {

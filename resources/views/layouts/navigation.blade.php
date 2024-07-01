@@ -18,8 +18,8 @@
                     <x-nav-link :href="route('appel-offre.index')" :active="request()->routeIs('appel-offre.index')">
                         {{ __('Appel d\'offre') }}
                     </x-nav-link>
-                    <x-nav-link :href="route('candidature.index')" :active="request()->routeIs('candidature.index')">
-                        {{ __('Candidature') }}
+                    <x-nav-link :href="route('valid_mail.index')" :active="request()->routeIs('valid_mail.index')">
+                        {{ __('Ajoute d\'Email valide') }}
                     </x-nav-link>
                     <x-nav-link :href="route('stage.directCreate')" :active="request()->routeIs('stage.create')">
                         {{ __('stage') }}

@@ -10,6 +10,7 @@ export default defineConfig({
                 'resources/css/index-appel-offre.css',
                 'resources/css/index-candidature.css',
                 'resources/css/header.css',
+                'resources/css/valid-mail-index.css'
             ],
             refresh: true,
         }),

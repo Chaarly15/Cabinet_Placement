@@ -13,6 +13,10 @@ use Illuminate\Support\Facades\Validator;
 
 class RegisterController extends Controller
 {
+    public function showSuperEmployerRegisterForm()
+    {
+        return view('auth.register-super-employer');
+    }
 
     protected function validator(array $data)
     {
@@ -48,11 +52,6 @@ class RegisterController extends Controller
         }
 
         return $user;
-    }
-
-    public function showSuperEmployerRegisterForm()
-    {
-        return view('auth.register-super-employer');
     }
 
     public function createSuperEmployer(Request $request)

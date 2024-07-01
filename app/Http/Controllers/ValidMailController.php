@@ -11,7 +11,7 @@ class ValidMailController extends Controller
 {
     public function index()
     {
-        $validMails = ValidMail::where('employer_id', Auth::user()->employer->id)->get();
+        $validMails = ValidMail::all();
         return view('valid_mail.index', compact('validMails'));
     }
 

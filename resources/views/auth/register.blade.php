@@ -9,6 +9,13 @@
             <x-input-error :messages="$errors->get('name')" class="mt-2" />
         </div>
 
+        <!-- Prenom -->
+        <div>
+            <x-input-label for="prenom" :value="__('Prenom')" />
+            <x-text-input id="prenom" class="block mt-1 w-full" type="text" name="prenom" :value="old('prenom')" required autofocus autocomplete="prenom" />
+            <x-input-error :messages="$errors->get('prenom')" class="mt-2" />
+        </div>
+
         <!-- Email Address -->
         <div class="mt-4">
             <x-input-label for="email" :value="__('Email')" />
@@ -37,6 +44,20 @@
                             name="password_confirmation" required autocomplete="new-password" />
 
             <x-input-error :messages="$errors->get('password_confirmation')" class="mt-2" />
+        </div>
+
+        <!-- Address -->
+        <div class="mt-4">
+            <x-input-label for="adress_empl" :value="__('Address')" />
+
+            <x-text-input id="adress_empl" class="block mt-1 w-full" type="text" name="adress_empl" :value="old('adress_empl')" required />
+        </div>
+
+        <!-- Telephone -->
+        <div class="mt-4">
+            <x-input-label for="tel_empl" :value="__('Telephone')" />
+
+            <x-text-input id="tel_empl" class="block mt-1 w-full" type="text" name="tel_empl" :value="old('tel_empl')" required />
         </div>
 
         <div class="flex items-center justify-end mt-4">

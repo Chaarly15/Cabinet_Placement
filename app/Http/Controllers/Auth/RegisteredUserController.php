@@ -13,6 +13,10 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules;
 use Illuminate\View\View;
 
+use App\Models\Employer;
+use App\Models\ValidMail;
+use Illuminate\Support\Facades\Validator;
+
 class RegisteredUserController extends Controller
 {
     /**
@@ -23,6 +27,15 @@ class RegisteredUserController extends Controller
         return view('auth.register');
     }
 
+    protected function validator(array $data)
+    {
+        return Validator::make($data, [
+            'name' => ['required', 'string', 'max:255'],
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+            'password' => ['required', 'string', 'min:8', 'confirmed'],
+        ]);
+    }
+
     /**
      * Handle an incoming registration request.
      *
@@ -30,16 +43,37 @@ class RegisteredUserController extends Controller
      */
     public function store(Request $request): RedirectResponse
     {
-        $request->validate([
-            'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:'.User::class],
-            'password' => ['required', 'confirmed', Rules\Password::defaults()],
-        ]);
+        $this->validator($request->all())->validate();
+
+        $validMailSuperemployer = ValidMail::where('email', $request->email)->where('role', 'super_employer')->first();
+        $validMailMediumemployer = ValidMail::where('email', $request->email)->where('role', 'medium_employer')->first();
+
+        if ($validMailSuperemployer) {
+            $role = 'super_employer';
+        } elseif ($validMailMediumemployer) {
+            $role = 'medium_employer';
+        } else {
+            return redirect()->back()->withErrors(['email' => 'Cet email n\'est pas autorisé à créer un compte employeur.']);
+        }
 
         $user = User::create([
-            'name' => $request->name,
+            //'name' => $request->name,
             'email' => $request->email,
             'password' => Hash::make($request->password),
+            'role' => $role,
+        ]);
+
+        Employer::create([
+            'user_id' => $user->id,
+            'nom' => $request->name,
+            'prenom' => $request->prenom,
+            'tel_empl' => $request->tel_empl,
+            'adress_empl' => $request->adress_empl,
+            //'ville' => $request->ville,
+            //'commune' => $request->commune,
+            //'poste' => $request->poste,
+            //'entreprise' => $request->entreprise,
+            'role' => $role,
         ]);
 
         event(new Registered($user));
