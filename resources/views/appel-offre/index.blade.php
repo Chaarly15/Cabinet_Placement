@@ -154,8 +154,38 @@
                                     <td>{{ $appelOffreAttenteV->intitule_poste }}</td>
                                     <td>{{ $appelOffreAttenteV->date_limite_candidature }}</td>
                                     <td>{{ __('En attente de validation') }}</td>
-                                    <td><a href="{{ route('selection.create', $appelOffreEnTraitement->id) }}">{{ __('Sélectionner d\'autre etudiants') }}</a></td>
-                                    <td><a href="{{ route('stage.create', $appelOffreEnTraitement->id) }}">{{ __('Valider le(s) stage(s)') }}</a></td>
+                                    <td><a href="{{ route('selection.create', $appelOffreAttenteV->id) }}">{{ __('Sélectionner d\'autre etudiants') }}</a></td>
+                                    <td><a href="{{ route('stage.create', $appelOffreAttenteV->id) }}">{{ __('Valider le(s) stage(s)') }}</a></td>
+                                </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                @endif
+
+                <h2>{{ __('Appels d\'offres traité') }}</h2>
+                @if($appelOffreValides->isEmpty())
+                    <p>Aucun appel d'offre disponible.</p>
+                @else
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>{{ __('Nom entreprise') }}</th>
+                                <th>{{ __('Titre du contrat') }}</th>
+                                <th>{{ __('Type d\'offre') }}</th>
+                                <th>{{ __('Intitulé du poste') }}</th>
+                                <th>{{ __('Date Limite') }}</th>
+                                <th>{{ __('État') }}</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach($appelOffreValides as $appelOffreValide)
+                                <tr>
+                                    <td>{{ $appelOffreValide->entreprise->nom_etp }}</td>
+                                    <td>{{ $appelOffreValide->nom_contrat }}</td>
+                                    <td>{{ $appelOffreValide->type_offre }}</td>
+                                    <td>{{ $appelOffreValide->intitule_poste }}</td>
+                                    <td>{{ $appelOffreValide->date_limite_candidature }}</td>
+                                    <td>{{ __('traitement terminé') }}</td>
                                 </tr>
                             @endforeach
                         </tbody>

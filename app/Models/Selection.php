@@ -27,7 +27,7 @@ class Selection extends Model
         return $this->belongsTo(Employer::class);
     }
 
-    public function etudiants()
+    public function etudiant()
     {
         return $this->belongsTo(Etudiant::class);
     }

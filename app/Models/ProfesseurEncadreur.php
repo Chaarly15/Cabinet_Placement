@@ -5,11 +5,11 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class ProfesseursEncadreur extends Model
+class ProfesseurEncadreur extends Model
 {
     use HasFactory;
 
-    protected $fillablev = [
+    protected $fillable = [
         'nom',
         'prenom',
         'tel_prof',
@@ -21,3 +21,4 @@ class ProfesseursEncadreur extends Model
         return $this->hasMany(Stage::class);
     }
 }
+

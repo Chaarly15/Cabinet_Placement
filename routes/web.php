@@ -10,6 +10,10 @@ use App\Http\Controllers\LanguageController;
 use App\Http\Controllers\AppelOffreController;
 use App\Http\Controllers\CandidatureController;
 use App\Http\Controllers\SelectionController;
+use App\Http\Controllers\ProfesseurEncadreurController;
+use App\Http\Controllers\StageController;
+use App\Http\Controllers\DashboardController;
+
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -39,6 +43,8 @@ Route::post('logout', [LoginController::class, 'logout'])->name('logout');
     Route::post('/register-super-employer', [RegisterController::class, 'createSuperEmployer']);
 //});
 
+//super_employer
+
 Route::middleware(['auth', 'super_employer'])->group(function () {
     Route::get('/appel-offre', [AppelOffreController::class, 'index'])->name('appel-offre.index');
     Route::get('/appel-offre/create', [AppelOffreController::class, 'create'])->name('appel-offre.create');
@@ -59,7 +65,16 @@ Route::middleware(['auth', 'super_employer'])->group(function () {
     Route::get('/selection/filter', [SelectionController::class, 'filter'])->name('selection.filter');
     Route::get('/selection/best_match/{appelOffreId}', [SelectionController::class, 'bestMatch'])->name('selection.best_match');
 
-    Route::get('/stage/create/appelOffre={id}', 'UserController@index')->name('user');
+    Route::get('/stage/create/appelOffre={id}', [StageController::class, 'create'])->name('stage.create');
+    Route::post('/stage/store', [StageController::class, 'store'])->name('stage.store');
+
+    Route::get('/stage/create', [StageController::class, 'directCreate'])->name('stage.directCreate');
+    Route::post('/stage/direct_store', [StageController::class, 'directStore'])->name('stage.directStore');
+
+    Route::get('/professeurs/create', [ProfesseurEncadreurController::class, 'create'])->name('professeurs.create');
+    Route::post('/professeurs', [ProfesseurEncadreurController::class, 'store'])->name('professeurs.store');
+
+    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 });
 
 /*Route::middleware(['auth', 'medium_employer'])->group(function () {

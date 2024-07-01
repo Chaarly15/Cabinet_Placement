@@ -9,6 +9,7 @@ export default defineConfig({
                 'resources/js/app.js',
                 'resources/css/index-appel-offre.css',
                 'resources/css/index-candidature.css',
+                'resources/css/header.css',
             ],
             refresh: true,
         }),

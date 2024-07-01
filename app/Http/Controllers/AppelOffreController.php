@@ -17,12 +17,14 @@ class AppelOffreController extends Controller
         $appelOffreExpirers = AppelOffre::where('date_limite_candidature', '<=', $currentDate)->get();
         $appelOffreEnTraitements = AppelOffre::where('etat_appel_offre', '=', 'en_traitement')->get();
         $appelOffreAttenteVs = AppelOffre::where('etat_appel_offre', '=', 'attente_v_stage')->get();
+        $appelOffreValides = AppelOffre::where('etat_appel_offre', '=', 'validé')->get();
 
         return view('appel-offre.index', [
             'appelOffreEnCours' => $appelOffreEnCours,
             'appelOffreExpirers' => $appelOffreExpirers,
             'appelOffreEnTraitements' => $appelOffreEnTraitements,
             'appelOffreAttenteVs' => $appelOffreAttenteVs,
+            'appelOffreValides' => $appelOffreValides,
         ]);
     }
 
